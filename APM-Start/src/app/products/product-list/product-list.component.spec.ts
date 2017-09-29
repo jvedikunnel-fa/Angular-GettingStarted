@@ -1,6 +1,8 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
+import {FormsModule} from '@angular/forms';
 import {ProductListComponent} from './product-list.component';
+import { ConvertToSpacesPipe } from '../../shared/convert-to-spaces.pipe';
 
 describe('ProductListComponent', () => {
   let component: ProductListComponent;
@@ -8,7 +10,13 @@ describe('ProductListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductListComponent ]
+      declarations: [
+        ProductListComponent,
+        ConvertToSpacesPipe
+      ],
+      imports: [
+        FormsModule
+      ]
     })
     .compileComponents();
   }));

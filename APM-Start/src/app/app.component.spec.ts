@@ -1,15 +1,21 @@
 import {async, TestBed} from '@angular/core/testing';
 
+import {FormsModule} from '@angular/forms';
 import {AppComponent} from './app.component';
 import {ProductListComponent} from './products/product-list/product-list.component';
+import { ConvertToSpacesPipe } from './shared/convert-to-spaces.pipe';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        ProductListComponent
+        ProductListComponent,
+        ConvertToSpacesPipe
       ],
+      imports: [
+        FormsModule
+      ]
     }).compileComponents();
   }));
 
