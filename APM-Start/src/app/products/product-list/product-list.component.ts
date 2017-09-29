@@ -39,6 +39,7 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('In OnInit');
   }
 
   toggleImage(): void {
