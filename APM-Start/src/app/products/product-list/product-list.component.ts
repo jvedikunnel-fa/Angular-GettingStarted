@@ -64,4 +64,7 @@ export class ProductListComponent implements OnInit {
     this.showImage = !this.showImage;
   }
 
+  onNotify(message: string): void {
+    console.log('notified : ' + message);
+  }
 }
