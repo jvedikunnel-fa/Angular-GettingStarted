@@ -1,21 +1,42 @@
-import {async, TestBed} from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 
-import {FormsModule} from '@angular/forms';
-import {AppComponent} from './app.component';
-import {ProductListComponent} from './products/product-list/product-list.component';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { AppComponent } from './app.component';
+import { ProductListComponent } from './products/product-list/product-list.component';
 import { ConvertToSpacesPipe } from './shared/convert-to-spaces.pipe';
+import { StarComponent } from './shared/star/star.component';
+import { ProductService } from './products/product.service';
+import { ProductGuardService } from './products/product-guard.service';
+import { ProductDetailComponent } from './products/product-detail/product-detail.component';
+import { WelcomeComponent } from './home/welcome/welcome.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
+        WelcomeComponent,
         ProductListComponent,
-        ConvertToSpacesPipe
+        ProductDetailComponent,
+        ConvertToSpacesPipe,
+        StarComponent
       ],
       imports: [
-        FormsModule
-      ]
+        FormsModule,
+        RouterModule.forRoot([
+          { path: 'products', component: ProductListComponent },
+          {
+            path: 'products/:id',
+            canActivate: [ProductGuardService],
+            component: ProductDetailComponent
+          },
+          { path: 'welcome', component: WelcomeComponent },
+          { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+          { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
+        ], { useHash: true })
+      ],
+      providers: [ProductService, ProductGuardService]
     }).compileComponents();
   }));
 
@@ -31,10 +52,10 @@ describe('AppComponent', () => {
     expect(app.pageTitle).toEqual('Acme Product Management');
   }));
 
-  it('should render title in a h1 tag', async(() => {
+  it('should render title in a a tag', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Acme Product Management');
+    expect(compiled.querySelector('a.navbar-brand').textContent).toContain('Acme Product Management');
   }));
 });
