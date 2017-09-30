@@ -3,7 +3,6 @@ import { IProduct } from '../products';
 import { ProductService } from '../product.service';
 
 @Component({
-  selector: 'pm-products',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
@@ -27,7 +26,6 @@ export class ProductListComponent implements OnInit {
   products: IProduct[] = [];
 
   constructor(private _productService: ProductService) {
-    this.filteredProducts = this.products;
     this.listFilter = '';
   }
 
@@ -36,7 +34,6 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('In OnInit');
     this._productService.getProducts()
     .subscribe(products => {
       this.products = products;
